@@ -38,7 +38,7 @@ def calcularPuntuacionMano(manoActual):
         if valor == "J" or valor == "Q" or valor == "K" :
             puntuacion += 10
             tengoFigura = True
-        elif valor == "A" :
+        elif valor == "AS" :
             # LLEVAR UN CONTROL DE LOS ASES
             tengoAs += 1
         else :
@@ -106,7 +106,7 @@ def comprobarBlackJack():
     # EVALÚA LA PRIMERA CARTA  
     partes = manoActual[0].split('_')
     valor = partes[0]
-    if valor == 'A':
+    if valor == 'AS':
         tengoAs = True
     elif valor == 'J' or valor == 'Q' or valor == 'K':
         tengoFigura = True
@@ -115,7 +115,7 @@ def comprobarBlackJack():
     # EVALÚA LA SEGUNDA CARTA
     partes = manoActual[1].split('_')
     valor = partes[0]
-    if valor == 'A' and tengoFigura:
+    if valor == 'AS' and tengoFigura:
         return True
     elif (valor == 'J' or valor == 'Q' or valor == 'K') and tengoAs:
         return True
@@ -125,7 +125,7 @@ def comprobarBlackJack():
 # TE PLANTAS Y MUESTRA TU PUNTUACIÓN FINAL   
 def plantarse(puntuacionJugador):
     puntuacionJugadorFinal = puntuacionJugador
-    print "Te has plantado con ", puntuacionJugadorFinal, "puntos"
+    print "Te has plantado con ", puntuacionJugadorFinal, "puntos\n"
 
 # REALIZA LA COMPROBACIÓN DE QUIÉN HA GANADO
 def comprobarGanador(puntuacionJugador, puntuacionMesa):
@@ -154,10 +154,12 @@ while respuesta.upper() == 'S':
         import string
         import random
         jugador = ""
-        baraja = ['A_C', '2_C', '3_C', '4_C', '5_C', '6_C', '7_C', '8_C', '9_C', '10_C', 'J_C', 'Q_C', 'K_C',
-                  'A_D', '2_D', '3_D', '4_D', '5_D', '6_D', '7_D', '8_D', '9_D', '10_D', 'J_D', 'Q_D', 'K_D',
-                  'A_T', '2_T', '3_T', '4_T', '5_T', '6_T', '7_T', '8_T', '9_T', '10_T', 'J_T', 'Q_T', 'K_T',
-                  'A_P', '2_P', '3_P', '4_P', '5_P', '6_P', '7_P', '8_P', '9_P', '10_P', 'J_P', 'Q_P', 'K_P']
+   
+
+        baraja = ['AS_CORAZONES', '2_CORAZONES', '3_CORAZONES', '4_CORAZONES', '5_CORAZONES', '6_CORAZONES', '7_CORAZONES', '8_CORAZONES', '9_CORAZONES', '10_CORAZONES', 'J_CORAZONES', 'Q_CORAZONES', 'K_CORAZONES',
+                  'AS_DIAMANTES', '2_DIAMANTES', '3_DIAMANTES', '4_DIAMANTES', '5_DIAMANTES', '6_DIAMANTES', '7_DIAMANTES', '8_DIAMANTES', '9_DIAMANTES', '10_DIAMANTES', 'J_DIAMANTES', 'Q_DIAMANTES', 'K_DIAMANTES',
+                  'AS_TREBOLES', '2_TREBOLES', '3_TREBOLES', '4_TREBOLES', '5_TREBOLES', '6_TREBOLES', '7_TREBOLES', '8_TREBOLES', '9_TREBOLES', '10_TREBOLES', 'J_TREBOLES', 'Q_TREBOLES', 'K_TREBOLES',
+                  'AS_PICAS', '2_PICAS', '3_PICAS', '4_PICAS', '5_PICAS', '6_PICAS', '7_PICAS', '8_PICAS', '9_PICAS', '10_PICAS', 'J_PICAS', 'Q_PICAS', 'K_PICAS']
         
         
         puntuacionJugador = 0
@@ -166,14 +168,14 @@ while respuesta.upper() == 'S':
         jugador = raw_input("Introduce tu nombre: ")
         print "Hola", jugador        
         # JUGADOR COMIENZA A JUGAR
+        print "\t....MANO INICIAL....\n"
         manoJugador = repartirCartasInicial()
         print "Mano jugador: ", manoJugador
         # MESA COMIENZA A JUGAR
         manoMesa = repartirCartasInicial()
-        print "Mano mesa: ", manoMesa[0]
+        print "Mano mesa: ", manoMesa[0],"\n"
         # CALCULA PUNTUACIONES DE LA PRIMERA MANO
         manoActual = list(manoJugador)
-        #LO PRIMERO QUE COMPRUEBO ES LA MANO QUE GANA DIRECTAMENTE Y FINALIZA: EL BLACKJACK
         if comprobarBlackJack():
             print "¡ENHORABUENA, TIENES BLACK JACK. HAS GANADOOOOO!"
             partidasGanadaJugador+=1
@@ -183,6 +185,7 @@ while respuesta.upper() == 'S':
             puntuacionMesa = calcularPuntuacionMano(manoActual)
             # PEDIR OPCIÓN AL JUGADOR SOBRE LO QUE QUIERE HACER
             manoActual = list(manoJugador)
+            print "\t<<<<TURNO JUGADOR:>>>>"
             puntuacionJugador = pedirOpcion(puntuacionJugador, manoActual)
             if puntuacionJugador > 21:
                 print puntuacionJugador, "PUNTOS. LO SIENTO TE HAS PASADO, LA BANCA GANA"
@@ -190,14 +193,14 @@ while respuesta.upper() == 'S':
             else:
                 # JUEGA LA MESA
                 manoActual = list(manoMesa)
-                #VUELVO A COMPROBAR SI ES LA MESA LA QUE TIENE BLACK JACK, SI ES ASI, GANA LA PARTIDA
+                print "\t<<<<TURNO MESA:>>>>"
                 if comprobarBlackJack():
                     print "¡OHH,LA MESA TIENE BLACK JACK. LA BANCA GANA!"
                     partidasGanadaMesa+=1
                 else:
                     puntuacionMesa = jugarMesa(baraja, puntuacionJugador)
                     print "Mano mesa: ", manoMesa
-                    print "Puntuacion final mesa: ", puntuacionMesa
+                    print "Puntuacion final mesa: ", puntuacionMesa,"\n"
                     # COMPRUEBA QUIÉN HA GANADO LA PARTIDA
                     comprobarGanador(puntuacionJugador, puntuacionMesa)
     respuesta = ""
@@ -206,6 +209,8 @@ while respuesta.upper() == 'S':
         respuesta = raw_input()
         if respuesta.upper() != 'S':
             print "El resultado final es:\nJugador:", partidasGanadaJugador, "\nMesa: ", partidasGanadaMesa
+        else:
+            print "El marcador va:\nJugador:", partidasGanadaJugador, "\nMesa: ", partidasGanadaMesa
            
 print "GRACIAS POR JUGAR A BLACK JACK. HASTA LA PRÓXIMA!!!"
                     
