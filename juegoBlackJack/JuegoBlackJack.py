@@ -173,6 +173,7 @@ while respuesta.upper() == 'S':
         print "Mano mesa: ", manoMesa[0]
         # CALCULA PUNTUACIONES DE LA PRIMERA MANO
         manoActual = list(manoJugador)
+        #LO PRIMERO QUE COMPRUEBO ES LA MANO QUE GANA DIRECTAMENTE Y FINALIZA: EL BLACKJACK
         if comprobarBlackJack():
             print "¡ENHORABUENA, TIENES BLACK JACK. HAS GANADOOOOO!"
             partidasGanadaJugador+=1
@@ -189,6 +190,7 @@ while respuesta.upper() == 'S':
             else:
                 # JUEGA LA MESA
                 manoActual = list(manoMesa)
+                #VUELVO A COMPROBAR SI ES LA MESA LA QUE TIENE BLACK JACK, SI ES ASI, GANA LA PARTIDA
                 if comprobarBlackJack():
                     print "¡OHH,LA MESA TIENE BLACK JACK. LA BANCA GANA!"
                     partidasGanadaMesa+=1
