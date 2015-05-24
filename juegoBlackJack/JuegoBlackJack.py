@@ -69,7 +69,7 @@ def jugarMesa(baraja, puntuacionJugador):
             puntuacionMesa = calcularPuntuacionMano(manoActual)
             if puntuacionMesa > puntuacionJugador and puntuacionMesa < 22:
                 return puntuacionMesa
-            elif puntuacionMesa < 17:
+            elif puntuacionMesa < 21:
                 manoMesa.append(extraerCarta(baraja))  # EXTRAE UNA CARTA DE LA BARAJA
         return puntuacionMesa
 
