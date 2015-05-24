@@ -48,9 +48,9 @@ def calcularPuntuacionMano(manoActual):
     # SI TU PUNTACION ES MAYOR DE 10, EL AS VALE UN PUNTO
     # SI LA PUNTUACION ES 10 O MENOR, EL AS VALDRÁ 11 PUNTOS
     if puntuacion > 10 :
-        tengoAs=1
+        puntuacion += tengoAs
     else :
-        tenggoAs=11
+        puntuacion += tengoAs * 10 + tengoAs
       
     return puntuacion
     
@@ -69,7 +69,7 @@ def jugarMesa(baraja, puntuacionJugador):
             puntuacionMesa = calcularPuntuacionMano(manoActual)
             if puntuacionMesa > puntuacionJugador and puntuacionMesa < 22:
                 return puntuacionMesa
-            elif puntuacionMesa < 21:
+            elif puntuacionMesa < 17:
                 manoMesa.append(extraerCarta(baraja))  # EXTRAE UNA CARTA DE LA BARAJA
         return puntuacionMesa
 
