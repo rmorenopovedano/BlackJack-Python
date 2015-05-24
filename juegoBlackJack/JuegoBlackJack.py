@@ -149,6 +149,10 @@ def comprobarGanador(puntuacionJugador, puntuacionMesa):
 respuesta = 'S'
 partidasGanadaMesa = 0
 partidasGanadaJugador = 0
+# SALUDO INICIAL
+print "*******BIENVENIDO AL JUEGO DEL BLACKJACK********"
+jugador = raw_input("Introduce tu nombre: ")
+print "Hola", jugador
 while respuesta.upper() == 'S': 
     if (__name__ == "__main__"):
         import string
@@ -163,10 +167,7 @@ while respuesta.upper() == 'S':
         
         
         puntuacionJugador = 0
-        # SALUDO INICIAL
-        print "*******BIENVENIDO AL JUEGO DEL BLACKJACK********"
-        jugador = raw_input("Introduce tu nombre: ")
-        print "Hola", jugador        
+              
         # JUGADOR COMIENZA A JUGAR
         print "\t....MANO INICIAL....\n"
         manoJugador = repartirCartasInicial()
